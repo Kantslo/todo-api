@@ -1,7 +1,6 @@
 import express from "express";
 import api from "./api/index.js";
 import cors from "cors";
-import { createTable } from "./config/sql.js";
 import pool, { createTable } from "./config/sql.js";
 
 const app = express();
