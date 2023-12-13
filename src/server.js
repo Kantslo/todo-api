@@ -1,5 +1,4 @@
 import express from "express";
-import api from "./api/index.js";
 import cors from "cors";
 import pool, { createTable } from "./config/sql.js";
 
@@ -27,7 +26,5 @@ const serverStart = () => {
   });
   app.listen(3001);
 };
-
-app.use("/api", api);
 
 init();
