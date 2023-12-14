@@ -30,7 +30,7 @@ const serverStart = () => {
     try {
       const { task, completed } = req.body;
       const resultQuery = await pool.query(
-        "INSERT INTO TABLE todos(task, completed) VALUES($1, $2)",
+        "INSERT INTO todos(task, completed) VALUES($1, $2)",
         [task, completed]
       );
       const rows = resultQuery.rows;
