@@ -4,7 +4,6 @@ import pool, { createTable } from "./config/sql.js";
 import bodyParser from "body-parser";
 
 const app = express();
-app.use(cors());
 
 const init = async () => {
   try {
@@ -17,6 +16,7 @@ const init = async () => {
 
 const serverStart = () => {
   app.use(bodyParser.json());
+  app.use(cors());
   app.get("/api/items", async (_, res) => {
     try {
       const resultQuery = await pool.query("SELECT * FROM todos");
