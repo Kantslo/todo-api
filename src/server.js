@@ -15,6 +15,8 @@ const init = async () => {
   }
 };
 
+console.log("fix");
+
 const serverStart = () => {
   app.use(bodyParser.json());
   app.use(cors());
