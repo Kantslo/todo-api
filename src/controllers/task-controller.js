@@ -37,3 +37,18 @@ export const deleteTask = async (req, res) => {
     return res.status(401).json(error);
   }
 };
+
+export const deleteCompletedTasks = async (res, req) => {
+  const completed = req.params.completed;
+
+  try {
+    const resultQuery = await pool.query(
+      "DELETE FROM todos WHERE completed = $1",
+      [completed]
+    );
+    const rows = resultQuery.rows;
+    return res.status(201).json(rows[0]);
+  } catch (error) {
+    return res.status(401).json(error);
+  }
+};
