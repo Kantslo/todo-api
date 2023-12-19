@@ -38,7 +38,7 @@ export const deleteTask = async (req, res) => {
   }
 };
 
-export const deleteCompletedTasks = async (_, res) => {
+export const deleteCompletedTasks = async (req, res) => {
   const completed = req.params.completed;
 
   try {
