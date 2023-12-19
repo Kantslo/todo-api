@@ -38,11 +38,11 @@ export const deleteTask = async (req, res) => {
   }
 };
 
-export const deleteCompletedTasks = async (req, res) => {
+export const deleteCompletedTasks = async (_, res) => {
   try {
     await pool.query("DELETE FROM tasks WHERE completed = true");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(401).send(error);
   }
 };
