@@ -44,8 +44,8 @@ export const deleteCompletedTasks = async (_, res) => {
       "DELETE FROM todos WHERE completed = true RETURNING *"
     );
     const deletedTasks = resultQuery.rows;
-    return res.status(200).json(deletedTasks[0]);
+    return res.status(200).json(deletedTasks);
   } catch (error) {
-    return res.status(401).json(error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
