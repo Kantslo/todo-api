@@ -44,7 +44,7 @@ export const deleteCompletedTasks = async (_, res) => {
       "DELETE FROM todos WHERE completed = true RETURNING *"
     );
     const deletedTasks = resultQuery.rows;
-    return res.status(200).json(deletedTasks);
+    return res.status(200).json(deletedTasks[0]);
   } catch (error) {
     return res.status(401).json(error);
   }
