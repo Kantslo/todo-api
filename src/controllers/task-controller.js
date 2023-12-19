@@ -14,11 +14,11 @@ export const createTask = async (req, res) => {
   try {
     const { task, completed } = req.body;
     const resultQuery = await pool.query(
-      "INSERT INTO todos(task, completed) VALUES($1, $2)",
+      "INSERT INTO todos(task, completed) VALUES($1, $2) RETURNING *",
       [task, completed]
     );
-    const rows = resultQuery.rows;
-    return res.status(201).json(rows[0]);
+    const newTodo = resultQuery.rows[0];
+    return res.status(201).json(newTodo);
   } catch (error) {
     return res.status(401).json(error);
   }
@@ -31,7 +31,8 @@ export const deleteTask = async (req, res) => {
     const resultQuery = await pool.query("DELETE FROM todos WHERE id = $1", [
       id,
     ]);
-    return res.status(201).json({ message: "task deleted!" });
+    const rows = resultQuery.rows;
+    return res.status(201).json(rows[0]);
   } catch (error) {
     return res.status(401).json(error);
   }
