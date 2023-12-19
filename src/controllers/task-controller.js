@@ -38,16 +38,13 @@ export const deleteTask = async (req, res) => {
   }
 };
 
-export const deleteCompletedTasks = async (req, res) => {
-  const completed = req.params.completed;
-
+export const deleteCompletedTasks = async (_, res) => {
   try {
     const resultQuery = await pool.query(
-      "DELETE FROM todos WHERE completed = $1",
-      [completed]
+      "DELETE FROM todos WHERE completed = true RETURNING *"
     );
     const deletedTasks = resultQuery.rows;
-    return res.status(201).json(deletedTasks);
+    return res.status(200).json(deletedTasks);
   } catch (error) {
     return res.status(401).json(error);
   }
