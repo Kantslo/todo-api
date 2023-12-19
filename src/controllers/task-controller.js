@@ -38,14 +38,11 @@ export const deleteTask = async (req, res) => {
   }
 };
 
-export const deleteCompletedTasks = async (_, res) => {
+export const deleteCompletedTasks = async (req, res) => {
   try {
-    const resultQuery = await pool.query(
-      "DELETE FROM todos WHERE completed = true RETURNING *"
-    );
-    const deletedTasks = resultQuery.rows;
-    return res.status(200).json(deletedTasks);
+    await pool.query("DELETE FROM tasks WHERE completed = true");
   } catch (error) {
-    return res.status(500).json({ error: "Internal Server Error" });
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 };
