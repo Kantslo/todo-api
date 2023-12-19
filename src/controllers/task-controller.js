@@ -43,7 +43,7 @@ export const deleteCompletedTasks = async (_, res) => {
 
   try {
     const resultQuery = await pool.query(
-      "DELETE FROM todos WHERE completed = true",
+      "DELETE FROM todos WHERE completed = $1",
       [completed]
     );
     const deletedTasks = resultQuery.rows;
