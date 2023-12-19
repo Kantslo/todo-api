@@ -39,9 +39,12 @@ export const deleteTask = async (req, res) => {
 };
 
 export const deleteCompletedTasks = async (_, res) => {
+  const completed = req.params.completed;
+
   try {
     const resultQuery = await pool.query(
-      "DELETE FROM todos WHERE completed = true"
+      "DELETE FROM todos WHERE completed = true",
+      [completed]
     );
     const deletedTasks = resultQuery.rows;
     return res.status(201).json(deletedTasks);
