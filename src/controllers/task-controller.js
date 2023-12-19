@@ -39,12 +39,13 @@ export const deleteTask = async (req, res) => {
 };
 
 export const deleteCompletedTasks = async (req, res) => {
-  const completedTaskIds = req.params.completed;
+  const completedTasks = req.params.completed;
 
   try {
-    const resultQuery = await pool.query("DELETE FROM todos WHERE id IN ($1)", [
-      completedTaskIds,
-    ]);
+    const resultQuery = await pool.query(
+      "DELETE FROM todos WHERE completed = $1",
+      [completedTasks]
+    );
     const rows = resultQuery.rows;
     return res.status(201).json(rows[0]);
   } catch (error) {
