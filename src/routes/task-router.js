@@ -4,6 +4,7 @@ import {
   deleteCompletedTasks,
   deleteTask,
   getAllTasks,
+  updateTaskCompletion,
 } from "../controllers/task-controller.js";
 
 const taskRouter = express.Router();
