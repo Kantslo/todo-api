@@ -12,5 +12,6 @@ taskRouter.get("/tasks", getAllTasks);
 taskRouter.post("/tasks", createTask);
 taskRouter.delete("/tasks/:id", deleteTask);
 taskRouter.delete("/tasks", deleteCompletedTasks);
+taskRouter.put("/tasks/:id", updateTaskCompletion);
 
 export default taskRouter;

@@ -42,7 +42,23 @@ export const deleteCompletedTasks = async (_, res) => {
   try {
     await pool.query("DELETE FROM todos WHERE completed = true");
   } catch (error) {
-    console.error(error);
-    res.status(401).send(error);
+    return res.status(401).json(error);
+  }
+};
+
+export const updateTaskCompletion = async (req, res) => {
+  const taskId = +req.params.id;
+  const { completed } = req.body;
+
+  try {
+    const resultQuery = await pool.query(
+      "UPDATE todos SET completed = $1 WHERE id = $2 RETURNING *",
+      [completed, taskId]
+    );
+
+    const updatedTodo = resultQuery.rows[0];
+    return res.status(200).json(updatedTodo);
+  } catch (error) {
+    return res.status(401).json(error);
   }
 };
